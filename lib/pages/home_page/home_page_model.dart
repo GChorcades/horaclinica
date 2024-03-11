@@ -40,14 +40,32 @@ class HomePageModel extends FlutterFlowModel<HomePageWidget> {
   FocusNode? feriasFocusNode;
   TextEditingController? feriasController;
   String? Function(BuildContext, String?)? feriasControllerValidator;
+  // State field(s) for Feriados widget.
+  FocusNode? feriadosFocusNode;
+  TextEditingController? feriadosController;
+  String? Function(BuildContext, String?)? feriadosControllerValidator;
   // State field(s) for desmarcacoes widget.
   FocusNode? desmarcacoesFocusNode;
   TextEditingController? desmarcacoesController;
   String? Function(BuildContext, String?)? desmarcacoesControllerValidator;
   // Stores action output result for [Firestore Query - Query a collection] action in Column widget.
   List<CustosVariaveisRecord>? outListaCopy;
-  // Stores action output result for [Firestore Query - Query a collection] action in Column widget.
-  List<CustosVariaveisRecord>? outListaCopyF;
+  // State field(s) for taxadecartao widget.
+  FocusNode? taxadecartaoFocusNode;
+  TextEditingController? taxadecartaoController;
+  String? Function(BuildContext, String?)? taxadecartaoControllerValidator;
+  // State field(s) for imposto widget.
+  FocusNode? impostoFocusNode;
+  TextEditingController? impostoController;
+  String? Function(BuildContext, String?)? impostoControllerValidator;
+  // State field(s) for parceiros widget.
+  FocusNode? parceirosFocusNode;
+  TextEditingController? parceirosController;
+  String? Function(BuildContext, String?)? parceirosControllerValidator;
+  // State field(s) for materias widget.
+  FocusNode? materiasFocusNode;
+  TextEditingController? materiasController;
+  String? Function(BuildContext, String?)? materiasControllerValidator;
 
   /// Initialization and disposal methods.
 
@@ -66,8 +84,23 @@ class HomePageModel extends FlutterFlowModel<HomePageWidget> {
     feriasFocusNode?.dispose();
     feriasController?.dispose();
 
+    feriadosFocusNode?.dispose();
+    feriadosController?.dispose();
+
     desmarcacoesFocusNode?.dispose();
     desmarcacoesController?.dispose();
+
+    taxadecartaoFocusNode?.dispose();
+    taxadecartaoController?.dispose();
+
+    impostoFocusNode?.dispose();
+    impostoController?.dispose();
+
+    parceirosFocusNode?.dispose();
+    parceirosController?.dispose();
+
+    materiasFocusNode?.dispose();
+    materiasController?.dispose();
   }
 
   /// Action blocks are added here.

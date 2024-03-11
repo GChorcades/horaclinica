@@ -66,8 +66,23 @@ class _HomePageWidgetState extends State<HomePageWidget>
     _model.feriasController ??= TextEditingController();
     _model.feriasFocusNode ??= FocusNode();
 
+    _model.feriadosController ??= TextEditingController();
+    _model.feriadosFocusNode ??= FocusNode();
+
     _model.desmarcacoesController ??= TextEditingController();
     _model.desmarcacoesFocusNode ??= FocusNode();
+
+    _model.taxadecartaoController ??= TextEditingController();
+    _model.taxadecartaoFocusNode ??= FocusNode();
+
+    _model.impostoController ??= TextEditingController();
+    _model.impostoFocusNode ??= FocusNode();
+
+    _model.parceirosController ??= TextEditingController();
+    _model.parceirosFocusNode ??= FocusNode();
+
+    _model.materiasController ??= TextEditingController();
+    _model.materiasFocusNode ??= FocusNode();
 
     setupAnimations(
       animationsMap.values.where((anim) =>
@@ -108,8 +123,9 @@ class _HomePageWidgetState extends State<HomePageWidget>
                 'Hora Clinica',
                 style: FlutterFlowTheme.of(context).headlineMedium.override(
                       fontFamily: 'Outfit',
-                      color: Colors.white,
+                      color: FlutterFlowTheme.of(context).primaryText,
                       fontSize: 22.0,
+                      fontWeight: FontWeight.bold,
                     ),
               ),
               Align(
@@ -259,6 +275,10 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                             .secondaryBackground,
                                         borderRadius:
                                             BorderRadius.circular(12.0),
+                                        border: Border.all(
+                                          color: FlutterFlowTheme.of(context)
+                                              .alternate,
+                                        ),
                                       ),
                                       child: Padding(
                                         padding: const EdgeInsets.all(10.0),
@@ -319,12 +339,13 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                   .text),
                                                               int.tryParse(_model
                                                                   .cadeirasController
+                                                                  .text),
+                                                              int.tryParse(_model
+                                                                  .feriadosController
                                                                   .text)),
                                                           functions.somaCustosFixos(
-                                                              FFAppState()
-                                                                  .totalProlabore,
-                                                              FFAppState()
-                                                                  .totalClinica)),
+                                                              FFAppState().totalProlabore,
+                                                              FFAppState().totalClinica)),
                                                       formatType:
                                                           FormatType.decimal,
                                                       decimalType: DecimalType
@@ -445,12 +466,13 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                   .text),
                                                               int.tryParse(_model
                                                                   .cadeirasController
+                                                                  .text),
+                                                              int.tryParse(_model
+                                                                  .feriadosController
                                                                   .text)),
                                                           functions.somaCustosFixos(
-                                                              FFAppState()
-                                                                  .totalProlabore,
-                                                              FFAppState()
-                                                                  .totalClinica)),
+                                                              FFAppState().totalProlabore,
+                                                              FFAppState().totalClinica)),
                                                       formatType:
                                                           FormatType.decimal,
                                                       decimalType: DecimalType
@@ -534,7 +556,8 @@ class _HomePageWidgetState extends State<HomePageWidget>
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(18.0, 18.0, 18.0, 12.0),
                   child: Material(
                     color: Colors.transparent,
                     elevation: 2.0,
@@ -545,6 +568,9 @@ class _HomePageWidgetState extends State<HomePageWidget>
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).secondaryBackground,
                         borderRadius: BorderRadius.circular(12.0),
+                        border: Border.all(
+                          color: FlutterFlowTheme.of(context).alternate,
+                        ),
                       ),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
@@ -555,7 +581,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
-                                  '${functions.clinicHours(double.tryParse(_model.horaTrabalhadasController.text), int.tryParse(_model.feriasController.text), double.tryParse(_model.desmarcacoesController.text), int.tryParse(_model.cadeirasController.text)).toString()} horas',
+                                  '${functions.clinicHours(double.tryParse(_model.horaTrabalhadasController.text), int.tryParse(_model.feriasController.text), double.tryParse(_model.desmarcacoesController.text), int.tryParse(_model.cadeirasController.text), int.tryParse(_model.feriadosController.text)).toString()} horas',
                                   style: FlutterFlowTheme.of(context)
                                       .headlineLarge,
                                 ),
@@ -859,6 +885,96 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                         padding: const EdgeInsetsDirectional.fromSTEB(
                                             8.0, 0.0, 8.0, 20.0),
                                         child: TextFormField(
+                                          controller: _model.feriadosController,
+                                          focusNode: _model.feriadosFocusNode,
+                                          onChanged: (_) =>
+                                              EasyDebounce.debounce(
+                                            '_model.feriadosController',
+                                            const Duration(milliseconds: 2000),
+                                            () => setState(() {}),
+                                          ),
+                                          autofocus: true,
+                                          obscureText: false,
+                                          decoration: InputDecoration(
+                                            labelText: 'Fériados',
+                                            labelStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .labelMedium,
+                                            hintStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .labelMedium,
+                                            enabledBorder: UnderlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .alternate,
+                                                width: 2.0,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                            ),
+                                            focusedBorder: UnderlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primary,
+                                                width: 2.0,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                            ),
+                                            errorBorder: UnderlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .error,
+                                                width: 2.0,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                            ),
+                                            focusedErrorBorder:
+                                                UnderlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .error,
+                                                width: 2.0,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                            ),
+                                            suffixIcon: _model
+                                                    .feriadosController!
+                                                    .text
+                                                    .isNotEmpty
+                                                ? InkWell(
+                                                    onTap: () async {
+                                                      _model.feriadosController
+                                                          ?.clear();
+                                                      setState(() {});
+                                                    },
+                                                    child: const Icon(
+                                                      Icons.clear,
+                                                      size: 22,
+                                                    ),
+                                                  )
+                                                : null,
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium,
+                                          keyboardType: TextInputType.number,
+                                          validator: _model
+                                              .feriadosControllerValidator
+                                              .asValidator(context),
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            8.0, 0.0, 8.0, 20.0),
+                                        child: TextFormField(
                                           controller:
                                               _model.desmarcacoesController,
                                           focusNode:
@@ -958,7 +1074,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 12.0),
                   child: Material(
                     color: Colors.transparent,
                     elevation: 2.0,
@@ -971,6 +1087,9 @@ class _HomePageWidgetState extends State<HomePageWidget>
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).secondaryBackground,
                         borderRadius: BorderRadius.circular(16.0),
+                        border: Border.all(
+                          color: FlutterFlowTheme.of(context).alternate,
+                        ),
                       ),
                       child: Align(
                         alignment: const AlignmentDirectional(0.0, 0.0),
@@ -1289,6 +1408,9 @@ class _HomePageWidgetState extends State<HomePageWidget>
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).secondaryBackground,
                       borderRadius: BorderRadius.circular(16.0),
+                      border: Border.all(
+                        color: FlutterFlowTheme.of(context).alternate,
+                      ),
                     ),
                     child: Align(
                       alignment: const AlignmentDirectional(0.0, 0.0),
@@ -1303,13 +1425,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                 padding: const EdgeInsets.all(6.0),
                                 child: SelectionArea(
                                     child: Text(
-                                  'R\$ ${formatNumber(
-                                    functions.somaCustosFixos(
-                                        FFAppState().totalProlabore,
-                                        FFAppState().totalClinica),
-                                    formatType: FormatType.decimal,
-                                    decimalType: DecimalType.commaDecimal,
-                                  )}',
+                                  'R\$ CUSTOS ',
                                   style: FlutterFlowTheme.of(context)
                                       .headlineLarge,
                                 )),
@@ -1322,250 +1438,379 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                 style: FlutterFlowTheme.of(context).bodyMedium,
                               ),
                             ),
-                            Align(
-                              alignment: const AlignmentDirectional(0.0, 0.0),
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Material(
-                                      color: Colors.transparent,
-                                      elevation: 4.0,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(6.0),
-                                      ),
-                                      child: Container(
-                                        width: 100.0,
-                                        height: 100.0,
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryBackground,
-                                          borderRadius:
-                                              BorderRadius.circular(6.0),
-                                          border: Border.all(
-                                            color: FlutterFlowTheme.of(context)
-                                                .accent4,
-                                            width: 1.0,
-                                          ),
+                                  Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          8.0, 0.0, 8.0, 20.0),
+                                      child: TextFormField(
+                                        controller:
+                                            _model.taxadecartaoController,
+                                        focusNode: _model.taxadecartaoFocusNode,
+                                        onChanged: (_) => EasyDebounce.debounce(
+                                          '_model.taxadecartaoController',
+                                          const Duration(milliseconds: 2000),
+                                          () => setState(() {}),
                                         ),
-                                        child: Align(
-                                          alignment:
-                                              const AlignmentDirectional(0.0, 0.0),
-                                          child: InkWell(
-                                            splashColor: Colors.transparent,
-                                            focusColor: Colors.transparent,
-                                            hoverColor: Colors.transparent,
-                                            highlightColor: Colors.transparent,
-                                            onTap: () async {
-                                              await showModalBottomSheet(
-                                                isScrollControlled: true,
-                                                backgroundColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryBackground,
-                                                enableDrag: false,
-                                                context: context,
-                                                builder: (context) {
-                                                  return GestureDetector(
-                                                    onTap: () => _model
-                                                            .unfocusNode
-                                                            .canRequestFocus
-                                                        ? FocusScope.of(context)
-                                                            .requestFocus(_model
-                                                                .unfocusNode)
-                                                        : FocusScope.of(context)
-                                                            .unfocus(),
-                                                    child: Padding(
-                                                      padding: MediaQuery
-                                                          .viewInsetsOf(
-                                                              context),
-                                                      child: const SizedBox(
-                                                        height: 400.0,
-                                                        child:
-                                                            ProlaboreWidget(),
-                                                      ),
-                                                    ),
-                                                  );
-                                                },
-                                              ).then((value) =>
-                                                  safeSetState(() {}));
-                                            },
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsets.all(10.0),
-                                                  child: Icon(
-                                                    Icons
-                                                        .monetization_on_outlined,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryText,
-                                                    size: 24.0,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(4.0),
-                                                  child: Text(
-                                                    'PRÓ-LABORE',
-                                                    textAlign: TextAlign.center,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium,
-                                                  ),
-                                                ),
-                                              ],
+                                        autofocus: true,
+                                        obscureText: false,
+                                        decoration: InputDecoration(
+                                          labelText: 'Taxa de Cartão',
+                                          labelStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium,
+                                          hintStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium,
+                                          enabledBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .alternate,
+                                              width: 2.0,
                                             ),
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
                                           ),
+                                          focusedBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              width: 2.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                          errorBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
+                                              width: 2.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                          focusedErrorBorder:
+                                              UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
+                                              width: 2.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                          suffixIcon: _model
+                                                  .taxadecartaoController!
+                                                  .text
+                                                  .isNotEmpty
+                                              ? InkWell(
+                                                  onTap: () async {
+                                                    _model
+                                                        .taxadecartaoController
+                                                        ?.clear();
+                                                    setState(() {});
+                                                  },
+                                                  child: const Icon(
+                                                    Icons.clear,
+                                                    size: 22,
+                                                  ),
+                                                )
+                                              : null,
                                         ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium,
+                                        textAlign: TextAlign.center,
+                                        keyboardType: TextInputType.number,
+                                        validator: _model
+                                            .taxadecartaoControllerValidator
+                                            .asValidator(context),
                                       ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Material(
-                                      color: Colors.transparent,
-                                      elevation: 4.0,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(6.0),
-                                      ),
-                                      child: Container(
-                                        width: 100.0,
-                                        height: 100.0,
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryBackground,
-                                          borderRadius:
-                                              BorderRadius.circular(6.0),
-                                          border: Border.all(
-                                            color: FlutterFlowTheme.of(context)
-                                                .accent4,
-                                            width: 1.0,
-                                          ),
+                                  Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          8.0, 0.0, 8.0, 20.0),
+                                      child: TextFormField(
+                                        controller: _model.impostoController,
+                                        focusNode: _model.impostoFocusNode,
+                                        onChanged: (_) => EasyDebounce.debounce(
+                                          '_model.impostoController',
+                                          const Duration(milliseconds: 2000),
+                                          () => setState(() {}),
                                         ),
-                                        child: Align(
-                                          alignment:
-                                              const AlignmentDirectional(0.0, 0.0),
-                                          child: InkWell(
-                                            splashColor: Colors.transparent,
-                                            focusColor: Colors.transparent,
-                                            hoverColor: Colors.transparent,
-                                            highlightColor: Colors.transparent,
-                                            onTap: () async {
-                                              _model.outListaCopyF =
-                                                  await queryCustosVariaveisRecordOnce();
-                                              setState(() {
-                                                FFAppState().numeros = _model
-                                                    .outListaCopyF!
-                                                    .map((e) => e.amount)
-                                                    .toList()
-                                                    .cast<double>();
-                                              });
-                                              await showModalBottomSheet(
-                                                isScrollControlled: true,
-                                                backgroundColor:
-                                                    Colors.transparent,
-                                                enableDrag: false,
-                                                context: context,
-                                                builder: (context) {
-                                                  return GestureDetector(
-                                                    onTap: () => _model
-                                                            .unfocusNode
-                                                            .canRequestFocus
-                                                        ? FocusScope.of(context)
-                                                            .requestFocus(_model
-                                                                .unfocusNode)
-                                                        : FocusScope.of(context)
-                                                            .unfocus(),
-                                                    child: Padding(
-                                                      padding: MediaQuery
-                                                          .viewInsetsOf(
-                                                              context),
-                                                      child:
-                                                          const CustosClinicaWidget(),
-                                                    ),
-                                                  );
-                                                },
-                                              ).then((value) =>
-                                                  safeSetState(() {}));
-
-                                              setState(() {});
-                                            },
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsets.all(10.0),
-                                                  child: Icon(
-                                                    Icons
-                                                        .maps_home_work_outlined,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryText,
-                                                    size: 24.0,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(4.0),
-                                                  child: Text(
-                                                    'CUSTO DA CLÍNICA',
-                                                    textAlign: TextAlign.center,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium,
-                                                  ),
-                                                ),
-                                              ],
+                                        autofocus: true,
+                                        obscureText: false,
+                                        decoration: InputDecoration(
+                                          labelText: 'Imposto',
+                                          labelStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium,
+                                          hintStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium,
+                                          enabledBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .alternate,
+                                              width: 2.0,
                                             ),
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
                                           ),
+                                          focusedBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              width: 2.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                          errorBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
+                                              width: 2.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                          focusedErrorBorder:
+                                              UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
+                                              width: 2.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                          suffixIcon: _model.impostoController!
+                                                  .text.isNotEmpty
+                                              ? InkWell(
+                                                  onTap: () async {
+                                                    _model.impostoController
+                                                        ?.clear();
+                                                    setState(() {});
+                                                  },
+                                                  child: const Icon(
+                                                    Icons.clear,
+                                                    size: 22,
+                                                  ),
+                                                )
+                                              : null,
                                         ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium,
+                                        textAlign: TextAlign.center,
+                                        keyboardType: TextInputType.number,
+                                        validator: _model
+                                            .impostoControllerValidator
+                                            .asValidator(context),
                                       ),
                                     ),
                                   ),
                                 ],
                               ),
                             ),
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      15.0, 0.0, 0.0, 0.0),
-                                  child: Text(
-                                    formatNumber(
-                                      FFAppState().totalProlabore,
-                                      formatType: FormatType.decimal,
-                                      decimalType: DecimalType.commaDecimal,
-                                      currency: 'R\$ ',
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          8.0, 0.0, 8.0, 20.0),
+                                      child: TextFormField(
+                                        controller: _model.parceirosController,
+                                        focusNode: _model.parceirosFocusNode,
+                                        onChanged: (_) => EasyDebounce.debounce(
+                                          '_model.parceirosController',
+                                          const Duration(milliseconds: 2000),
+                                          () => setState(() {}),
+                                        ),
+                                        autofocus: true,
+                                        obscureText: false,
+                                        decoration: InputDecoration(
+                                          labelText: 'Parceiros',
+                                          labelStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium,
+                                          hintStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium,
+                                          enabledBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .alternate,
+                                              width: 2.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                          focusedBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              width: 2.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                          errorBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
+                                              width: 2.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                          focusedErrorBorder:
+                                              UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
+                                              width: 2.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                          suffixIcon: _model
+                                                  .parceirosController!
+                                                  .text
+                                                  .isNotEmpty
+                                              ? InkWell(
+                                                  onTap: () async {
+                                                    _model.parceirosController
+                                                        ?.clear();
+                                                    setState(() {});
+                                                  },
+                                                  child: const Icon(
+                                                    Icons.clear,
+                                                    size: 22,
+                                                  ),
+                                                )
+                                              : null,
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium,
+                                        textAlign: TextAlign.center,
+                                        keyboardType: TextInputType.number,
+                                        validator: _model
+                                            .parceirosControllerValidator
+                                            .asValidator(context),
+                                      ),
                                     ),
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyMedium,
                                   ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 16.0, 0.0),
-                                  child: Text(
-                                    formatNumber(
-                                      FFAppState().totalClinica,
-                                      formatType: FormatType.decimal,
-                                      decimalType: DecimalType.commaDecimal,
-                                      currency: 'R\$ ',
+                                  Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          8.0, 0.0, 8.0, 20.0),
+                                      child: TextFormField(
+                                        controller: _model.materiasController,
+                                        focusNode: _model.materiasFocusNode,
+                                        onChanged: (_) => EasyDebounce.debounce(
+                                          '_model.materiasController',
+                                          const Duration(milliseconds: 2000),
+                                          () => setState(() {}),
+                                        ),
+                                        autofocus: true,
+                                        obscureText: false,
+                                        decoration: InputDecoration(
+                                          labelText: 'Materiais',
+                                          labelStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium,
+                                          hintStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium,
+                                          enabledBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .alternate,
+                                              width: 2.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                          focusedBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              width: 2.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                          errorBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
+                                              width: 2.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                          focusedErrorBorder:
+                                              UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
+                                              width: 2.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                          suffixIcon: _model.materiasController!
+                                                  .text.isNotEmpty
+                                              ? InkWell(
+                                                  onTap: () async {
+                                                    _model.materiasController
+                                                        ?.clear();
+                                                    setState(() {});
+                                                  },
+                                                  child: const Icon(
+                                                    Icons.clear,
+                                                    size: 22,
+                                                  ),
+                                                )
+                                              : null,
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium,
+                                        textAlign: TextAlign.center,
+                                        keyboardType: TextInputType.number,
+                                        validator: _model
+                                            .materiasControllerValidator
+                                            .asValidator(context),
+                                      ),
                                     ),
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyMedium,
                                   ),
-                                ),
-                              ].divide(const SizedBox(width: 10.0)),
+                                ],
+                              ),
                             ),
                           ],
                         ),

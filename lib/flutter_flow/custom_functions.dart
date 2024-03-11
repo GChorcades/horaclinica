@@ -16,17 +16,21 @@ double clinicHours(
   int? ferias,
   double? desmarcacoes,
   int? cadeiras,
+  int? feriados,
 ) {
   // Verifica se qualquer um dos parâmetros é nulo
   if (hours == null ||
       cadeiras == null ||
       ferias == null ||
-      desmarcacoes == null) {
+      desmarcacoes == null ||
+      feriados == null) {
     return 0.0;
   }
   int days = 254;
+
+  int diasuteis = days - (ferias + feriados);
   // Calcula as horas totais, descontando as férias
-  double horasTotais = days * hours - (ferias * hours) * cadeiras;
+  double horasTotais = diasuteis * hours * cadeiras;
 
   // Calcula as horas desmarcadas com base no percentual de desmarcações
   double desmarcoesHoras = horasTotais * desmarcacoes / 100;
