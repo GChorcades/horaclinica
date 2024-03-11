@@ -47,7 +47,7 @@ class HomePageModel extends FlutterFlowModel<HomePageWidget> {
   // Stores action output result for [Firestore Query - Query a collection] action in Column widget.
   List<CustosVariaveisRecord>? outListaCopy;
   // Stores action output result for [Firestore Query - Query a collection] action in Column widget.
-  List<CustosVariaveisRecord>? outListaCopy;
+  List<CustosVariaveisRecord>? outListaCopyF;
 
   /// Initialization and disposal methods.
 

@@ -1458,11 +1458,11 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                             hoverColor: Colors.transparent,
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
-                                              _model.outListaCopy =
+                                              _model.outListaCopyF =
                                                   await queryCustosVariaveisRecordOnce();
                                               setState(() {
                                                 FFAppState().numeros = _model
-                                                    .outListaCopy!
+                                                    .outListaCopyF!
                                                     .map((e) => e.amount)
                                                     .toList()
                                                     .cast<double>();
