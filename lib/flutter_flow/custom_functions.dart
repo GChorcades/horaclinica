@@ -24,7 +24,7 @@ double clinicHours(
       desmarcacoes == null) {
     return 0.0;
   }
-  int days = 244;
+  int days = 254;
   // Calcula as horas totais, descontando as férias
   double horasTotais = days * hours - (ferias * hours) * cadeiras;
 

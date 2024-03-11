@@ -46,6 +46,8 @@ class HomePageModel extends FlutterFlowModel<HomePageWidget> {
   String? Function(BuildContext, String?)? desmarcacoesControllerValidator;
   // Stores action output result for [Firestore Query - Query a collection] action in Column widget.
   List<CustosVariaveisRecord>? outListaCopy;
+  // Stores action output result for [Firestore Query - Query a collection] action in Column widget.
+  List<CustosVariaveisRecord>? outListaCopy;
 
   /// Initialization and disposal methods.
 

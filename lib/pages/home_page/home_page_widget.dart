@@ -534,7 +534,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(18.0),
+                  padding: const EdgeInsets.all(12.0),
                   child: Material(
                     color: Colors.transparent,
                     elevation: 2.0,
@@ -957,6 +957,326 @@ class _HomePageWidgetState extends State<HomePageWidget>
                     ),
                   ),
                 ),
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Material(
+                    color: Colors.transparent,
+                    elevation: 2.0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16.0),
+                    ),
+                    child: Container(
+                      width: 352.0,
+                      height: 240.0,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                        borderRadius: BorderRadius.circular(16.0),
+                      ),
+                      child: Align(
+                        alignment: const AlignmentDirectional(0.0, 0.0),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Align(
+                                alignment: const AlignmentDirectional(0.0, 0.0),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(6.0),
+                                  child: SelectionArea(
+                                      child: Text(
+                                    'R\$ ${formatNumber(
+                                      functions.somaCustosFixos(
+                                          FFAppState().totalProlabore,
+                                          FFAppState().totalClinica),
+                                      formatType: FormatType.decimal,
+                                      decimalType: DecimalType.commaDecimal,
+                                    )}',
+                                    style: FlutterFlowTheme.of(context)
+                                        .headlineLarge,
+                                  )),
+                                ),
+                              ),
+                              Align(
+                                alignment: const AlignmentDirectional(0.0, 0.0),
+                                child: Text(
+                                  'CUSTOS FIXOS',
+                                  style:
+                                      FlutterFlowTheme.of(context).bodyMedium,
+                                ),
+                              ),
+                              Align(
+                                alignment: const AlignmentDirectional(0.0, 0.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Material(
+                                        color: Colors.transparent,
+                                        elevation: 4.0,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(6.0),
+                                        ),
+                                        child: Container(
+                                          width: 100.0,
+                                          height: 100.0,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryBackground,
+                                            borderRadius:
+                                                BorderRadius.circular(6.0),
+                                            border: Border.all(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .accent4,
+                                              width: 1.0,
+                                            ),
+                                          ),
+                                          child: Align(
+                                            alignment:
+                                                const AlignmentDirectional(0.0, 0.0),
+                                            child: InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                await showModalBottomSheet(
+                                                  isScrollControlled: true,
+                                                  backgroundColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .secondaryBackground,
+                                                  enableDrag: false,
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return GestureDetector(
+                                                      onTap: () => _model
+                                                              .unfocusNode
+                                                              .canRequestFocus
+                                                          ? FocusScope.of(
+                                                                  context)
+                                                              .requestFocus(_model
+                                                                  .unfocusNode)
+                                                          : FocusScope.of(
+                                                                  context)
+                                                              .unfocus(),
+                                                      child: Padding(
+                                                        padding: MediaQuery
+                                                            .viewInsetsOf(
+                                                                context),
+                                                        child: const SizedBox(
+                                                          height: 400.0,
+                                                          child:
+                                                              ProlaboreWidget(),
+                                                        ),
+                                                      ),
+                                                    );
+                                                  },
+                                                ).then((value) =>
+                                                    safeSetState(() {}));
+                                              },
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(10.0),
+                                                    child: Icon(
+                                                      Icons
+                                                          .monetization_on_outlined,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .secondaryText,
+                                                      size: 24.0,
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(4.0),
+                                                    child: Text(
+                                                      'PRÓ-LABORE',
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Material(
+                                        color: Colors.transparent,
+                                        elevation: 4.0,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(6.0),
+                                        ),
+                                        child: Container(
+                                          width: 100.0,
+                                          height: 100.0,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryBackground,
+                                            borderRadius:
+                                                BorderRadius.circular(6.0),
+                                            border: Border.all(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .accent4,
+                                              width: 1.0,
+                                            ),
+                                          ),
+                                          child: Align(
+                                            alignment:
+                                                const AlignmentDirectional(0.0, 0.0),
+                                            child: InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                _model.outListaCopy =
+                                                    await queryCustosVariaveisRecordOnce();
+                                                setState(() {
+                                                  FFAppState().numeros = _model
+                                                      .outListaCopy!
+                                                      .map((e) => e.amount)
+                                                      .toList()
+                                                      .cast<double>();
+                                                });
+                                                await showModalBottomSheet(
+                                                  isScrollControlled: true,
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  enableDrag: false,
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return GestureDetector(
+                                                      onTap: () => _model
+                                                              .unfocusNode
+                                                              .canRequestFocus
+                                                          ? FocusScope.of(
+                                                                  context)
+                                                              .requestFocus(_model
+                                                                  .unfocusNode)
+                                                          : FocusScope.of(
+                                                                  context)
+                                                              .unfocus(),
+                                                      child: Padding(
+                                                        padding: MediaQuery
+                                                            .viewInsetsOf(
+                                                                context),
+                                                        child:
+                                                            const CustosClinicaWidget(),
+                                                      ),
+                                                    );
+                                                  },
+                                                ).then((value) =>
+                                                    safeSetState(() {}));
+
+                                                setState(() {});
+                                              },
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(10.0),
+                                                    child: Icon(
+                                                      Icons
+                                                          .maps_home_work_outlined,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .secondaryText,
+                                                      size: 24.0,
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(4.0),
+                                                    child: Text(
+                                                      'CUSTO DA CLÍNICA',
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        15.0, 0.0, 0.0, 0.0),
+                                    child: Text(
+                                      formatNumber(
+                                        FFAppState().totalProlabore,
+                                        formatType: FormatType.decimal,
+                                        decimalType: DecimalType.commaDecimal,
+                                        currency: 'R\$ ',
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 16.0, 0.0),
+                                    child: Text(
+                                      formatNumber(
+                                        FFAppState().totalClinica,
+                                        formatType: FormatType.decimal,
+                                        decimalType: DecimalType.commaDecimal,
+                                        currency: 'R\$ ',
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium,
+                                    ),
+                                  ),
+                                ].divide(const SizedBox(width: 10.0)),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
                 Material(
                   color: Colors.transparent,
                   elevation: 2.0,
@@ -998,7 +1318,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                             Align(
                               alignment: const AlignmentDirectional(0.0, 0.0),
                               child: Text(
-                                'CUSTOS FIXOS',
+                                'CUSTOS VARIÁVEIS',
                                 style: FlutterFlowTheme.of(context).bodyMedium,
                               ),
                             ),
